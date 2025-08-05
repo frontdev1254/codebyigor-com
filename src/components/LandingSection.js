@@ -1,11 +1,11 @@
 import React from "react"; 
 import { Avatar, Heading, VStack } from "@chakra-ui/react"; 
 import FullScreenSection from "./FullScreenSection"; 
-import { useTranslation } from 'react-i18next'; // Importando o hook de tradução
-import profileImage from '../images/Igor Profile.jpeg'; // Importando a imagem local
+import { useTranslation } from 'react-i18next'; 
+import profileImage from '../images/Igor Profile.jpeg'; 
 
 const LandingSection = () => {
-  const { t } = useTranslation(); // Inicializando o hook para traduções
+  const { t } = useTranslation();
 
   return (
     <FullScreenSection
@@ -14,23 +14,36 @@ const LandingSection = () => {
       isDarkBackground
       backgroundColor="#2A4365"
     >
-      <VStack spacing={16}>
-        <VStack spacing={4} alignItems="center">
+      <VStack spacing={[8, 12, 16]} px={[4, 6, 0]}>
+        <VStack spacing={[2, 4]} alignItems="center">
           <Avatar
-            src={profileImage} // Usando a imagem importada
-            size="2xl"
-            name="Your Name"
+            src={profileImage}
+            size={["xl", "2xl"]} // menor no mobile
+            name="Igor Souza"
           />
-          <Heading as="h4" size="md" noOfLines={1}>
-            {t("greeting")} {/* Substituindo por chave de tradução */}
+          <Heading 
+            as="h4" 
+            fontSize={["md", "lg", "xl"]} 
+            textAlign="center"
+          >
+            {t("greeting")}
           </Heading>
         </VStack>
-        <VStack spacing={6}>
-          <Heading as="h1" size="3xl" noOfLines={1}>
-            {t("bio1")} {/* Substituindo por chave de tradução */}
+
+        <VStack spacing={[3, 4]} textAlign="center">
+          <Heading 
+            as="h1" 
+            fontSize={["2xl", "3xl", "4xl"]} 
+            noOfLines={[2, 1]}
+          >
+            {t("bio1")}
           </Heading>
-          <Heading as="h1" size="3xl" noOfLines={1}>
-            {t("bio2")} {/* Substituindo por chave de tradução */}
+          <Heading 
+            as="h1" 
+            fontSize={["2xl", "3xl", "4xl"]} 
+            noOfLines={[2, 1]}
+          >
+            {t("bio2")}
           </Heading>
         </VStack>
       </VStack>

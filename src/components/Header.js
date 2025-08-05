@@ -8,7 +8,7 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack, Button } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next"; // Importando o hook do i18n
+import { useTranslation } from "react-i18next";
 
 const socials = [
   {
@@ -35,7 +35,7 @@ const socials = [
 
 const Header = () => {
   const headerRef = useRef(null);
-  const { i18n, t } = useTranslation(); // Hook do i18n para tradução
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -43,9 +43,8 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const headerElement = headerRef.current;
-      if (!headerElement) {
-        return;
-      }
+      if (!headerElement) return;
+
       if (prevScrollPos > currentScrollPos) {
         headerElement.style.transform = "translateY(0)";
       } else {
@@ -53,25 +52,19 @@ const Header = () => {
       }
       prevScrollPos = currentScrollPos;
     };
-    window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  // Função para alternar idioma
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === "en" ? "pt" : "en");
   };
@@ -88,40 +81,43 @@ const Header = () => {
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
       ref={headerRef}
+      zIndex={999}
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto">
-        <HStack px={16} py={4} justifyContent="space-between" alignItems="center">
-          <nav>
-            <HStack spacing={8}>
-              {socials.map(({ icon, url }) => (
-                <a key={url} href={url} target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon icon={icon} size="2x" key={url} />
-                </a>
-              ))}
-            </HStack>
-          </nav>
-          <nav>
-            <HStack spacing={8}>
-              <a href="#projects" onClick={handleClick("projects")}>
-                {t("projects")}
+      <Box color="white" maxW="1280px" mx="auto" px={{ base: 4, md: 8 }}>
+        <HStack
+          py={4}
+          justify="space-between"
+          align="center"
+          spacing={{ base: 4, md: 8 }}
+          flexWrap="wrap"
+        >
+          {/* Social icons - left */}
+          <HStack spacing={{ base: 4, md: 6 }}>
+            {socials.map(({ icon, url }) => (
+              <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={icon} size="lg" />
               </a>
-              <a href="#contactme" onClick={handleClick("contactme")}>
-                {t("contact")}
-              </a>
-              {/* Botão de troca de idioma */}
-              <Button
-                size="sm"
-                backgroundColor="#2A4365"  // Cor de fundo do botão
-                color="white"  // Cor do texto do botão
-                onClick={toggleLanguage}
-                _hover={{
-                  backgroundColor: "#2b4f7c", // Cor de fundo ao passar o mouse
-                }}
-              >
-                {i18n.language === "en" ? "🇧🇷 PT" : "🇺🇸 EN"}
-              </Button>
-            </HStack>
-          </nav>
+            ))}
+          </HStack>
+
+          {/* Navigation links - right */}
+          <HStack spacing={{ base: 4, md: 6 }}>
+            <a href="#projects" onClick={handleClick("projects")}>
+              {t("projects")}
+            </a>
+            <a href="#contactme" onClick={handleClick("contactme")}>
+              {t("contact")}
+            </a>
+            <Button
+              size="sm"
+              backgroundColor="#2A4365"
+              color="white"
+              onClick={toggleLanguage}
+              _hover={{ backgroundColor: "#2b4f7c" }}
+            >
+              {i18n.language === "en" ? "🇧🇷 PT" : "🇺🇸 EN"}
+            </Button>
+          </HStack>
         </HStack>
       </Box>
     </Box>

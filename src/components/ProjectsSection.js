@@ -36,18 +36,26 @@ const ProjectsSection = () => {
     <FullScreenSection
       backgroundColor="#1D1D1F"
       isDarkBackground
-      p={8}
+      p={[4, 6, 8]} // padding responsivo
       alignItems="flex-start"
       spacing={8}
     >
-      <Heading as="h1" id="projects-section">
+      <Heading 
+        as="h1" 
+        id="projects-section" 
+        fontSize={["2xl", "3xl", "4xl"]} 
+        mb={4}
+        textAlign={["center", "left"]} // centraliza no mobile
+        width="100%"
+      >
         {t("projectsSection.title")}
       </Heading>
+
       <Box
         display="grid"
-        gridTemplateColumns="repeat(2,minmax(0,1fr))"
-        gridGap={8}
-        alignItems="flex-start" // Alinhamento à esquerda dos cards
+        gridTemplateColumns={["1fr", "repeat(2, 1fr)"]} // 1 coluna no mobile, 2 no desktop
+        gridGap={[4, 6, 8]}
+        width="100%"
       >
         {projects.map((project) => (
           <Card
@@ -55,7 +63,7 @@ const ProjectsSection = () => {
             title={t(project.title)}
             description={t(project.description)}
             imageSrc={project.getImageSrc()}
-            seeMoreText={t("seeMore")} // Passando a tradução para o Card
+            seeMoreText={t("seeMore")}
             link={project.link}
           />
         ))}

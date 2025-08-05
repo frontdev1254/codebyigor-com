@@ -50,15 +50,28 @@ const ContactMeSection = () => {
   }, [response]);
 
   return (
-    <FullScreenSection isDarkBackground backgroundColor="#1D1D1F" py={16} spacing={8}>
-      <VStack w="1024px" p={32} alignItems="flex-start">
+    <FullScreenSection
+      isDarkBackground
+      backgroundColor="#1D1D1F"
+      py={16}
+      spacing={8}
+    >
+      <VStack
+        w="100%"
+        maxW="1024px"
+        px={[4, 6, 8, 12]} // padding horizontal adaptado para cada breakpoint
+        py={[6, 8, 12, 16]} // padding vertical adaptado
+        alignItems="flex-start"
+      >
         <Heading as="h1" id="contactme-section">
           {t("contactMe")}
         </Heading>
-        <Box p={6} rounded="md" w="100%">
+        <Box p={[4, 6, 8]} rounded="md" w="100%">
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
-              <FormControl isInvalid={!!formik.errors.firstName && formik.touched.firstName}>
+              <FormControl
+                isInvalid={!!formik.errors.firstName && formik.touched.firstName}
+              >
                 <FormLabel htmlFor="firstName">{t("name")}</FormLabel>
                 <Input
                   id="firstName"
@@ -70,7 +83,9 @@ const ContactMeSection = () => {
                 <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
 
-              <FormControl isInvalid={!!formik.errors.email && formik.touched.email}>
+              <FormControl
+                isInvalid={!!formik.errors.email && formik.touched.email}
+              >
                 <FormLabel htmlFor="email">{t("email")}</FormLabel>
                 <Input
                   id="email"
@@ -94,14 +109,22 @@ const ContactMeSection = () => {
                   focusBorderColor="purple.500"
                 >
                   <option value="hireMe">{t("enquiryOptions.hireMe")}</option>
-                  <option value="collaboration">{t("enquiryOptions.collaboration")}</option>
-                  <option value="businessInquiry">{t("enquiryOptions.businessInquiry")}</option>
-                  <option value="generalQuestion">{t("enquiryOptions.generalQuestion")}</option>
+                  <option value="collaboration">
+                    {t("enquiryOptions.collaboration")}
+                  </option>
+                  <option value="businessInquiry">
+                    {t("enquiryOptions.businessInquiry")}
+                  </option>
+                  <option value="generalQuestion">
+                    {t("enquiryOptions.generalQuestion")}
+                  </option>
                   <option value="other">{t("enquiryOptions.other")}</option>
                 </Select>
               </FormControl>
 
-              <FormControl isInvalid={!!formik.errors.comment && formik.touched.comment}>
+              <FormControl
+                isInvalid={!!formik.errors.comment && formik.touched.comment}
+              >
                 <FormLabel htmlFor="comment">{t("yourMessage")}</FormLabel>
                 <Textarea
                   id="comment"
@@ -115,16 +138,15 @@ const ContactMeSection = () => {
               </FormControl>
 
               <Button
-              type="submit"
-              bg="#007aff"
-              color="white"
-              _hover={{ bg: "#005ecb" }}
-              width="full"
-              isLoading={isLoading}
-             >
-             {t("submit")}
-             </Button>
-
+                type="submit"
+                bg="#007aff"
+                color="white"
+                _hover={{ bg: "#005ecb" }}
+                width="full"
+                isLoading={isLoading}
+              >
+                {t("submit")}
+              </Button>
             </VStack>
           </form>
         </Box>
