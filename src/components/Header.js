@@ -84,15 +84,17 @@ const Header = () => {
       zIndex={999}
     >
       <Box color="white" maxW="1280px" mx="auto" px={{ base: 4, md: 8 }}>
-        <HStack
+        <Box
           py={4}
-          justify="space-between"
-          align="center"
-          spacing={{ base: 4, md: 8 }}
-          flexWrap="wrap"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexWrap="nowrap"
+          overflowX="auto"
+          gap={{ base: 2, md: 6 }}
         >
           {/* Social icons - left */}
-          <HStack spacing={{ base: 4, md: 6 }}>
+          <HStack spacing={{ base: 3, md: 6 }} flexShrink={0}>
             {socials.map(({ icon, url }) => (
               <a key={url} href={url} target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={icon} size="lg" />
@@ -101,7 +103,7 @@ const Header = () => {
           </HStack>
 
           {/* Navigation links - right */}
-          <HStack spacing={{ base: 4, md: 6 }}>
+          <HStack spacing={{ base: 3, md: 6 }} flexShrink={0}>
             <a href="#projects" onClick={handleClick("projects")}>
               {t("projects")}
             </a>
@@ -118,7 +120,7 @@ const Header = () => {
               {i18n.language === "en" ? "🇧🇷 PT" : "🇺🇸 EN"}
             </Button>
           </HStack>
-        </HStack>
+        </Box>
       </Box>
     </Box>
   );
